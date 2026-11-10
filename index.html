@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linea del tempo · Dalla fondazione di Roma alla Grande Guerra </title>
+  <meta name="description" content="Linea del tempo interattiva con 26 eventi storici, dalla fondazione di Roma alla Prima guerra mondiale, con ricerca in tempo reale.">
+  <meta name="theme-color" content="#03060d">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071022'/%3E%3Cpath d='M32 12v40' stroke='%234d8dff' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='22' r='7' fill='%238fc3ff'/%3E%3Ccircle cx='32' cy='42' r='7' fill='%234d8dff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Attiva le animazioni solo se JavaScript funziona; se script.js non si carica, i contenuti restano visibili.
+    document.documentElement.classList.add('js');
+    window.setTimeout(function () {
+      if (!window.lineaDelTempoPronta) {
+        document.documentElement.classList.remove('js');
+      }
+    }, 3000);
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="salta" href="#linea-del-tempo">Vai alla linea del tempo</a>
+
+  <!-- Barra superiore con la ricerca -->
+  <header class="barra-superiore">
+    <div class="contenitore barra-interna">
+      <a class="logo" href="#inizio" aria-label="Linea del tempo, torna all’inizio">
+        <svg class="logo-segno" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo-sfumatura" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8fc3ff"></stop>
+              <stop offset="1" stop-color="#3b6fe0"></stop>
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="30" height="30" rx="9" fill="#0b1730" stroke="rgba(143,195,255,0.35)"></rect>
+          <path d="M16 6v20" stroke="url(#logo-sfumatura)" stroke-width="2.4" stroke-linecap="round"></path>
+          <circle cx="16" cy="11" r="3.4" fill="#8fc3ff"></circle>
+          <circle cx="16" cy="21" r="3.4" fill="#4d8dff"></circle>
+        </svg>
+        <span>Linea del tempo</span>
+      </a>
+
+      <form class="ricerca" role="search" action="#" autocomplete="off">
+        <label class="sr-only" for="campo-ricerca">Cerca tra date ed eventi</label>
+        <svg class="ricerca-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="campo-ricerca" name="q" type="search" placeholder="Cerca un anno, un evento o un personaggio…" spellcheck="false" enterkeyhint="search" aria-describedby="contatore">
+        <kbd class="scorciatoia" title="Premi / per cercare">/</kbd>
+        <button class="pulisci" type="button" aria-label="Cancella la ricerca" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18"></path>
+          </svg>
+        </button>
+      </form>
+
+      <p class="contatore" id="contatore" aria-live="polite"><strong>26</strong> eventi</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Introduzione -->
+    <section class="intro contenitore" id="inizio">
+      <p class="sopratitolo">Timeline storica</p>
+<h2> Boiko Mykola 5A </h2>
+      <h1>Dalla fondazione di Roma <em>alla Grande Guerra</em></h1>
+      
+      <p class="lead">Ventisei tappe fondamentali della storia d’Italia e d’Europa, in ordine cronologico. Usa la barra di ricerca per trovare subito un anno, un evento o un personaggio.</p>
+
+      <ul class="statistiche">
+        <li><strong>26</strong><span>eventi</span></li>
+        <li><strong>4</strong><span>epoche</span></li>
+        <li><strong>2.600+</strong><span>anni di storia</span></li>
+      </ul>
+
+      <div class="suggerimenti" role="group" aria-label="Ricerche suggerite">
+        <span class="suggerimenti-etichetta">Prova a cercare:</span>
+        <button class="chip" type="button" data-cerca="Roma" aria-pressed="false">Roma</button>
+        <button class="chip" type="button" data-cerca="Impero" aria-pressed="false">Impero</button>
+        <button class="chip" type="button" data-cerca="Napoleone" aria-pressed="false">Napoleone</button>
+        <button class="chip" type="button" data-cerca="Risorgimento" aria-pressed="false">Risorgimento</button>
+        <button class="chip" type="button" data-cerca="Garibaldi" aria-pressed="false">Garibaldi</button>
+        <button class="chip" type="button" data-cerca="guerra" aria-pressed="false">Guerra</button>
+      </div>
+    </section>
+
+    <!-- Linea del tempo -->
+    <section class="linea-del-tempo contenitore" id="linea-del-tempo" aria-label="Linea del tempo degli eventi">
+      <div class="binario" aria-hidden="true"></div>
+
+      <!-- ==================== ETÀ ANTICA ==================== -->
+      <section class="epoca" data-epoca="Età antica" aria-labelledby="epoca-antica">
+        <header class="epoca-intestazione">
+          <div class="epoca-targa">
+            <h2 class="epoca-nome" id="epoca-antica">Età antica</h2>
+            <p class="epoca-descrizione">Da Romolo alla caduta dell’Impero romano d’Occidente</p>
+          </div>
+        </header>
+
+        <ol class="eventi">
+          <li class="evento" data-parole="Romolo Remo Palatino lupa re monarchia sette re avanti Cristo">
+            <article class="scheda">
+              <p class="data">753 a.C.</p>
+              <h3 class="titolo">Fondazione di Roma</h3>
+              <p class="sottotitolo">Romolo</p>
+              <p class="descrizione">Secondo la tradizione, Romolo fonda Roma sul colle Palatino dopo la lite con il fratello Remo. Ne diventa il primo re: inizia così il periodo monarchico, con sette re in tutto.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Roma monarchica</li>
+                <li>VIII sec. a.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Tarquinio il Superbo etruschi consoli Senato res publica avanti Cristo">
+            <article class="scheda">
+              <p class="data">509 a.C.</p>
+              <h3 class="titolo">Nascita della Repubblica</h3>
+              <p class="sottotitolo">Cacciata dei re etruschi</p>
+              <p class="descrizione">I Romani cacciano Tarquinio il Superbo, ultimo re di origine etrusca, e mettono fine alla monarchia. Il potere passa a due consoli eletti ogni anno, affiancati dal Senato.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Roma repubblicana</li>
+                <li>VI sec. a.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Cartagine cartaginesi Annibale Scipione Africano elefanti Alpi Mediterraneo Sicilia avanti Cristo">
+            <article class="scheda">
+              <p class="data">264 a.C. – 146 a.C.</p>
+              <h3 class="titolo">Guerre puniche</h3>
+              <p class="sottotitolo">Roma contro Cartagine</p>
+              <p class="descrizione">Tre lunghe guerre oppongono Roma a Cartagine per il controllo del Mediterraneo occidentale. Annibale attraversa le Alpi con i suoi elefanti, ma viene infine sconfitto da Scipione l’Africano. Il conflitto si chiude con la distruzione di Cartagine.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Roma repubblicana</li>
+                <li>III–II sec. a.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Giulio Cesare Bruto Cassio dittatore congiurati Senato pugnalato avanti Cristo">
+            <article class="scheda">
+              <p class="data">44 a.C.</p>
+              <h3 class="titolo">Idi di marzo</h3>
+              <p class="sottotitolo">La congiura contro Giulio Cesare</p>
+              <p class="descrizione">Giulio Cesare, nominato dittatore a vita, viene pugnalato durante una seduta del Senato da un gruppo di congiurati guidati da Bruto e Cassio. La sua morte apre una nuova stagione di guerre civili.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Roma repubblicana</li>
+                <li>I sec. a.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Ottaviano Augusto imperatore principato pax romana avanti Cristo">
+            <article class="scheda">
+              <p class="data">27 a.C.</p>
+              <h3 class="titolo">Augusto</h3>
+              <p class="sottotitolo">Inizio dell’Impero romano</p>
+              <p class="descrizione">Ottaviano, figlio adottivo di Cesare, riceve dal Senato il titolo di Augusto e diventa di fatto il primo imperatore. Le istituzioni repubblicane restano solo in apparenza e si apre un lungo periodo di stabilità: la pax romana.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Impero romano</li>
+                <li>I sec. a.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Costantino Licinio cristiani cristianesimo liberta di culto religione dopo Cristo">
+            <article class="scheda">
+              <p class="data">313 d.C.</p>
+              <h3 class="titolo">Editto di Milano</h3>
+              <p class="sottotitolo">Costantino</p>
+              <p class="descrizione">Gli imperatori Costantino e Licinio concedono la libertà di culto in tutto l’impero. I cristiani, a lungo perseguitati, possono finalmente professare la propria fede alla luce del sole.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Impero romano</li>
+                <li>IV sec. d.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Teodosio Onorio Arcadio Milano Costantinopoli Occidente Oriente divisione dopo Cristo">
+            <article class="scheda">
+              <p class="data">395 d.C.</p>
+              <h3 class="titolo">Divisione dell’Impero romano</h3>
+              <p class="sottotitolo">Occidente e Oriente</p>
+              <p class="descrizione">Alla morte dell’imperatore Teodosio l’impero viene diviso tra i suoi figli: Onorio governa l’Occidente, con capitale Milano, e Arcadio l’Oriente, con capitale Costantinopoli. Le due metà avranno destini molto diversi.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Impero romano</li>
+                <li>IV sec. d.C.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Odoacre Romolo Augustolo barbari Germani caduta Medioevo dopo Cristo">
+            <article class="scheda">
+              <p class="data">476 d.C.</p>
+              <h3 class="titolo">Fine dell’Impero romano d’Occidente</h3>
+              <p class="sottotitolo">Invasioni barbariche</p>
+              <p class="descrizione">Il capo barbaro Odoacre depone il giovane Romolo Augustolo, ultimo imperatore d’Occidente, e invia le insegne imperiali a Costantinopoli. Per convenzione questa data segna la fine dell’età antica e l’inizio del Medioevo.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Impero romano</li>
+                <li>V sec. d.C.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ==================== MEDIOEVO ==================== -->
+      <section class="epoca" data-epoca="Medioevo" aria-labelledby="epoca-medioevo">
+        <header class="epoca-intestazione">
+          <div class="epoca-targa">
+            <h2 class="epoca-nome" id="epoca-medioevo">Medioevo</h2>
+            <p class="epoca-descrizione">Dall’impero di Carlo Magno alla divisione tra le Chiese</p>
+          </div>
+        </header>
+
+        <ol class="eventi">
+          <li class="evento" data-parole="Carlo Magno Leone III papa Franchi Carolingi incoronazione Natale San Pietro">
+            <article class="scheda">
+              <p class="data">800</p>
+              <h3 class="titolo">Nascita del Sacro Romano Impero</h3>
+              <p class="sottotitolo">Carlo Magno</p>
+              <p class="descrizione">Il giorno di Natale papa Leone III incorona Carlo Magno, re dei Franchi, imperatore nella basilica di San Pietro a Roma. In Occidente rinasce l’idea di un impero cristiano universale.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Alto Medioevo</li>
+                <li>VIII sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Chiesa cattolica ortodossa scomunica papa patriarca Michele Cerulario grande scisma">
+            <article class="scheda">
+              <p class="data">1054</p>
+              <h3 class="titolo">Scisma d’Oriente</h3>
+              <p class="sottotitolo">Separazione tra Chiesa cattolica e Chiesa ortodossa</p>
+              <p class="descrizione">Dopo secoli di contrasti, i legati del papa e il patriarca di Costantinopoli Michele Cerulario si scomunicano a vicenda. La cristianità si divide tra Chiesa cattolica in Occidente e Chiesa ortodossa in Oriente.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Basso Medioevo</li>
+                <li>XI sec.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ==================== ETÀ MODERNA ==================== -->
+      <section class="epoca" data-epoca="Età moderna" aria-labelledby="epoca-moderna">
+        <header class="epoca-intestazione">
+          <div class="epoca-targa">
+            <h2 class="epoca-nome" id="epoca-moderna">Età moderna</h2>
+            <p class="epoca-descrizione">Dalla caduta di Costantinopoli alla Riforma protestante</p>
+          </div>
+        </header>
+
+        <ol class="eventi">
+          <li class="evento" data-parole="Turchi ottomani Maometto II Bisanzio bizantini Istanbul assedio sultano Quattrocento">
+            <article class="scheda">
+              <p class="data">1453</p>
+              <h3 class="titolo">Caduta di Costantinopoli</h3>
+              <p class="sottotitolo">Fine dell’Impero bizantino · Inizio dell’età moderna</p>
+              <p class="descrizione">I Turchi ottomani del sultano Maometto II conquistano Costantinopoli dopo un lungo assedio. Cade l’Impero bizantino, ultimo erede dell’Impero romano d’Oriente, e per molti storici inizia l’età moderna.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Impero bizantino</li>
+                <li>XV sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Cristoforo Colombo America Nuovo Mondo Spagna caravelle Indie scoperte geografiche Umanesimo Rinascimento arte Quattrocento">
+            <article class="scheda">
+              <p class="data">1492</p>
+              <h3 class="titolo">Primo viaggio di Colombo</h3>
+              <p class="sottotitolo">Scoperta dell’America · Umanesimo e Rinascimento</p>
+              <p class="descrizione">Finanziato dai sovrani di Spagna, Cristoforo Colombo naviga verso ovest per raggiungere le Indie e approda invece in un continente sconosciuto agli Europei. In Italia è la stagione dell’Umanesimo e del Rinascimento, con la riscoperta dei classici e una straordinaria fioritura delle arti.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Scoperte geografiche</li>
+                <li>XV sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Martin Lutero Wittenberg indulgenze protestanti protestantesimo Riforma Germania Cinquecento">
+            <article class="scheda">
+              <p class="data">1517</p>
+              <h3 class="titolo">Le 95 tesi di Martin Lutero</h3>
+              <p class="sottotitolo">Riforma protestante</p>
+              <p class="descrizione">Il monaco agostiniano Martin Lutero diffonde a Wittenberg le sue 95 tesi contro la vendita delle indulgenze. La sua protesta dà origine alla Riforma protestante e divide la cristianità occidentale.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Età della Riforma</li>
+                <li>XVI sec.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ==================== ETÀ CONTEMPORANEA ==================== -->
+      <section class="epoca" data-epoca="Età contemporanea" aria-labelledby="epoca-contemporanea">
+        <header class="epoca-intestazione">
+          <div class="epoca-targa">
+            <h2 class="epoca-nome" id="epoca-contemporanea">Età contemporanea</h2>
+            <p class="epoca-descrizione">Dalla Rivoluzione francese all’Unità d’Italia e alla Grande Guerra</p>
+          </div>
+        </header>
+
+        <ol class="eventi">
+          <li class="evento" data-parole="Bastiglia Parigi Luigi XVI diritti dell'uomo liberta uguaglianza fraternita Settecento">
+            <article class="scheda">
+              <p class="data">1789</p>
+              <h3 class="titolo">Rivoluzione francese</h3>
+              <p class="sottotitolo">Libertà, uguaglianza, fraternità</p>
+              <p class="descrizione">Il popolo di Parigi insorge contro la monarchia assoluta di Luigi XVI e la presa della Bastiglia diventa il simbolo della rivoluzione. L’Assemblea nazionale approva la Dichiarazione dei diritti dell’uomo e del cittadino.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Età delle rivoluzioni</li>
+                <li>XVIII sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Napoleone Bonaparte Francia Austria Piemonte repubbliche sorelle giacobine Cisalpina Settecento">
+            <article class="scheda">
+              <p class="data">1796 – 1799</p>
+              <h3 class="titolo">Campagna d’Italia</h3>
+              <p class="sottotitolo">Napoleone Bonaparte</p>
+              <p class="descrizione">Il giovane generale Napoleone Bonaparte guida l’esercito francese in Italia e sconfigge più volte Austriaci e Piemontesi. Nella penisola nascono repubbliche ispirate alla Francia rivoluzionaria, dette repubbliche sorelle o giacobine.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Età napoleonica</li>
+                <li>XVIII sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Metternich Austria Restaurazione sovrani Napoleone Europa Ottocento">
+            <article class="scheda">
+              <p class="data">1814 – 1815</p>
+              <h3 class="titolo">Congresso di Vienna</h3>
+              <p class="sottotitolo">Restaurazione</p>
+              <p class="descrizione">Dopo la sconfitta di Napoleone, le grandi potenze si riuniscono a Vienna per ridisegnare la carta d’Europa. Tornano sul trono i sovrani spodestati e l’Italia resta divisa in vari Stati, in gran parte sotto l’influenza dell’Austria.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Età della Restaurazione</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Carboneria carbonari costituzione Spagna Napoli Due Sicilie Piemonte Austria Ottocento">
+            <article class="scheda">
+              <p class="data">1820 – 1821</p>
+              <h3 class="titolo">Moti rivoluzionari</h3>
+              <p class="sottotitolo">Spagna e Italia</p>
+              <p class="descrizione">Società segrete come la Carboneria organizzano insurrezioni per ottenere una costituzione, prima in Spagna e poi nel Regno delle Due Sicilie e in Piemonte. In Italia i moti vengono repressi dall’intervento dell’esercito austriaco.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Mazzini Giovine Italia repubblica Dio e popolo Marsiglia esilio Ottocento">
+            <article class="scheda">
+              <p class="data">1831</p>
+              <h3 class="titolo">Giuseppe Mazzini</h3>
+              <p class="sottotitolo">Fondazione della Giovine Italia</p>
+              <p class="descrizione">Esule a Marsiglia, Giuseppe Mazzini fonda la Giovine Italia, un’associazione che vuole un’Italia unita, indipendente e repubblicana. Il suo motto è «Dio e popolo» e il suo metodo è l’insurrezione popolare.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Carlo Alberto Statuto Albertino Cinque giornate Milano Austria Radetzky primavera dei popoli Piemonte Ottocento">
+            <article class="scheda">
+              <p class="data">1848</p>
+              <h3 class="titolo">Prima guerra d’indipendenza</h3>
+              <p class="sottotitolo">Moti · Cinque giornate di Milano · Statuto Albertino</p>
+              <p class="descrizione">In tutta Europa scoppiano rivoluzioni: è la «primavera dei popoli». Carlo Alberto concede lo Statuto Albertino, Milano insorge contro gli Austriaci nelle Cinque giornate e il Regno di Sardegna dichiara guerra all’Austria, ma alla fine viene sconfitto.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Cavour Napoleone III Magenta Solferino San Martino Lombardia Vittorio Emanuele II Ottocento">
+            <article class="scheda">
+              <p class="data">1859</p>
+              <h3 class="titolo">Seconda guerra d’indipendenza</h3>
+              <p class="sottotitolo">Alleanza tra Francia e Piemonte</p>
+              <p class="descrizione">Grazie all’alleanza costruita da Cavour con la Francia di Napoleone III, il Regno di Sardegna sconfigge l’Austria a Magenta, Solferino e San Martino. Il Piemonte ottiene la Lombardia.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Giuseppe Garibaldi Mille camicie rosse Quarto Marsala Sicilia Teano Due Sicilie Borbone Ottocento">
+            <article class="scheda">
+              <p class="data">1860</p>
+              <h3 class="titolo">Spedizione dei Mille</h3>
+              <p class="sottotitolo">Garibaldi · Unità d’Italia</p>
+              <p class="descrizione">Giuseppe Garibaldi parte da Quarto, vicino a Genova, con circa mille volontari in camicia rossa e conquista il Regno delle Due Sicilie. L’incontro di Teano con Vittorio Emanuele II apre la strada all’Unità d’Italia.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Vittorio Emanuele II Torino Parlamento Regno d'Italia Unita Cavour re Ottocento">
+            <article class="scheda">
+              <p class="data">17 marzo 1861</p>
+              <h3 class="titolo">Proclamazione del Regno d’Italia</h3>
+              <p class="sottotitolo">Vittorio Emanuele II</p>
+              <p class="descrizione">Il primo Parlamento italiano, riunito a Torino, proclama il Regno d’Italia e Vittorio Emanuele II ne diventa il primo re. Torino è la capitale, ma Veneto e Roma restano ancora fuori dal nuovo Stato.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Prussia Austria Custoza Lissa Bezzecca Garibaldi Veneto Venezia Ottocento">
+            <article class="scheda">
+              <p class="data">1866</p>
+              <h3 class="titolo">Terza guerra d’indipendenza</h3>
+              <p class="sottotitolo">Annessione del Veneto</p>
+              <p class="descrizione">Alleata della Prussia contro l’Austria, l’Italia è sconfitta a Custoza e a Lissa, ma grazie alla vittoria prussiana ottiene ugualmente il Veneto. Garibaldi si distingue con la vittoria di Bezzecca.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="bersaglieri Porta Pia papa Pio IX Stato Pontificio potere temporale Roma capitale Ottocento">
+            <article class="scheda">
+              <p class="data">20 settembre 1870</p>
+              <h3 class="titolo">Breccia di Porta Pia</h3>
+              <p class="sottotitolo">Roma capitale</p>
+              <p class="descrizione">I bersaglieri aprono una breccia nelle mura di Roma vicino a Porta Pia ed entrano in città. Finisce il potere temporale dei papi: Roma è annessa al Regno d’Italia e ne diventerà la capitale.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Risorgimento</li>
+                <li>XIX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Giovanni Giolitti Libia Tripolitania Cirenaica Impero ottomano Dodecaneso colonie colonialismo Novecento">
+            <article class="scheda">
+              <p class="data">1911 – 1912</p>
+              <h3 class="titolo">Guerra di Libia</h3>
+              <p class="sottotitolo">L’Italia contro l’Impero ottomano</p>
+              <p class="descrizione">Il governo di Giovanni Giolitti dichiara guerra all’Impero ottomano per conquistare la Libia. Con la pace l’Italia ottiene la Tripolitania e la Cirenaica e occupa le isole del Dodecaneso.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Età giolittiana</li>
+                <li>XX sec.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="evento" data-parole="Grande Guerra neutralisti interventisti Intesa Austria-Ungheria Caporetto Piave Vittorio Veneto Trento Trieste trincee Novecento">
+            <article class="scheda">
+              <p class="data">1915 – 1918</p>
+              <h3 class="titolo">Prima guerra mondiale</h3>
+              <p class="sottotitolo">Interventisti · Caporetto · Trento e Trieste</p>
+              <p class="descrizione">Dopo un acceso scontro tra neutralisti e interventisti, l’Italia entra in guerra con l’Intesa contro l’Austria-Ungheria. Superata la disfatta di Caporetto, l’esercito resiste sul Piave e vince a Vittorio Veneto: l’Italia ottiene Trento e Trieste.</p>
+              <ul class="etichette" aria-label="Periodo">
+                <li>Grande Guerra</li>
+                <li>XX sec.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </section>
+    </section>
+
+    <!-- Messaggio quando la ricerca non trova nulla -->
+    <div class="nessun-risultato contenitore" id="nessun-risultato" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-3.5-3.5"></path>
+        <path d="M8.5 11h5"></path>
+      </svg>
+      <h2>Nessun evento trovato</h2>
+      <p>Nessun risultato per «<span id="termine-cercato"></span>». Prova con un anno, un nome o una parola diversa.</p>
+      <button class="bottone" id="azzera-ricerca" type="button">Mostra tutti gli eventi</button>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenitore">
+      <p class="pie-titolo">Linea del tempo · 26 eventi dalla fondazione di Roma alla Prima guerra mondiale</p>
+      <p class="pie-aiuto">Suggerimento: premi <kbd>/</kbd> per cercare ed <kbd>Esc</kbd> per cancellare la ricerca.</p>
+    </div>
+  </footer>
+
+  <button class="torna-su" type="button" aria-label="Torna all’inizio della pagina">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+</body>
+</html>
